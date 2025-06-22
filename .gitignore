@@ -1,2 +1,11 @@
-.env
-database
+build/
+nbproject/private
+nbproject/project.properties
+
+manifest.mf
+build.xml
+
+**/.env
+**/*.log
+**/*.properties
+**/*.form
