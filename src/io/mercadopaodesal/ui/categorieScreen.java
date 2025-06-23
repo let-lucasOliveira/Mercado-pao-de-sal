@@ -165,10 +165,8 @@ public class categorieScreen extends javax.swing.JFrame {
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         if(id_field.getText().isBlank()){
             addCategory();
-            System.out.println("Texto em branco");
         }else{
             editCategory();
-            System.out.println("Texto nao em branco");
         }
         clearForm();
     }//GEN-LAST:event_save_btnActionPerformed
