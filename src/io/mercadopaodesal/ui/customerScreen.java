@@ -1,7 +1,7 @@
 package io.mercadopaodesal.ui;
 
 import io.mercadopaodesal.dao.Customer;
-import io.mercadopaodesal.dao.Customer;
+import io.mercadopaodesal.dao.CustomerDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,14 +29,28 @@ public class customerScreen extends javax.swing.JFrame {
     }
     
     private void addCustomer () {
-        Customer c = new Customer();
+        Customer newC = new Customer();
         
-        name = name_field.getText();
-        email = email_field.getText();
-        cpf = cpf_field.getText();
+        newC.setNome(name_field.getText());
+        newC.setEmail(email_field.getText());
+        newC.setCpf(cpf_field.getText());
+        
+        CustomerDAO cDao = new CustomerDAO();
+        cDao.add(newC);
+        
+        clearForm();
     }
+    
     private void editCustomer () {
+        Customer newC = new Customer();
         
+        newC.setId(Integer.parseInt(id_field.getText()));
+        newC.setNome(name_field.getText());
+        newC.setEmail(email_field.getText());
+        newC.setCpf(cpf_field.getText());
+        
+        CustomerDAO cDAO = new CustomerDAO();
+        cDAO.update(newC);
     }
     
     public customerScreen() {
