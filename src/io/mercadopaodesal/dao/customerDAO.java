@@ -4,16 +4,62 @@
  */
 package io.mercadopaodesal.dao;
 
+import io.mercadopaodesal.db.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author lucas
  */
-public class customerDAO {
+public class CustomerDAO {
+    private ConnectionFactory cnct;
+    private Connection conn;
+    
+    public CustomerDAO () {
+        this.cnct = new ConnectionFactory ();
+        this.conn = this.cnct.getConnection ();
+    }
+        public void inserir (Customer customer) {
+        String sql = "INSERT INTO pessoa (nome, sexo, idioma) VALUES (?,?,?);";
+        
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, customer.getNome());
+            stmt.setString(2, customer.getEmail());
+            stmt.setInt(3, customer.getCpf());
+            
+            stmt.execute();
+        } catch (SQLException ex) {
+            System.out.println("Erro ao inserir pessoa: "+ex.getMessage());
+        }
+    }
+        
+    public void editar(Customer customer){
+        try{   
+            String sql = "UPDATE pessoa SET nome=?, sexo=?, idioma=? WHERE id=?";
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        // TODO code application logic here
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, customer.getNome());
+            stmt.setString(2, customer.getEmail());
+            stmt.setInt(3, customer.getCpf());
+            stmt.setInt(4,customer.getId());
+            stmt.execute();
+        } catch(SQLException ex){
+            System.out.println("Error to update the customer data: "+ex.getMessage());
+       }
+    }
+    
+    public void excluir (int id) {
+        try{
+            String sql = "DELETE FROM pessoa WHERE id=?";
+            
+            PreparedStatement stmt = conn.prepareCall(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+        }catch(SQLException ex){
+            System.out.println("Erro ao excluir pessoa: "+ex.getMessage());
+        }
     }
 }
