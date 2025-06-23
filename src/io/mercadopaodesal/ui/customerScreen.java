@@ -39,6 +39,7 @@ public class customerScreen extends javax.swing.JFrame {
         cDao.add(newC);
         
         clearForm();
+        System.out.println("addCostumer escolhida");
     }
     
     private void editCustomer () {
@@ -51,6 +52,10 @@ public class customerScreen extends javax.swing.JFrame {
         
         CustomerDAO cDAO = new CustomerDAO();
         cDAO.update(newC);
+        
+        clearForm();
+        
+        System.out.println("editCustomer escolhida");
     }
     
     public customerScreen() {
@@ -85,6 +90,11 @@ public class customerScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         home_btn.setText("Voltar");
+        home_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                home_btnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nome");
 
@@ -96,11 +106,20 @@ public class customerScreen extends javax.swing.JFrame {
 
         jLabel5.setText("ID");
 
-        id_field.setEnabled(false);
+        id_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_fieldActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("ID");
 
         id_sch_field.setToolTipText("");
+        id_sch_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_sch_fieldActionPerformed(evt);
+            }
+        });
 
         search_btn.setText("Buscar");
 
@@ -128,9 +147,9 @@ public class customerScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(id_sch_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(id_sch_field))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(search_btn))))
                     .addGroup(layout.createSequentialGroup()
@@ -148,7 +167,7 @@ public class customerScreen extends javax.swing.JFrame {
                                     .addComponent(name_field)
                                     .addComponent(email_field)
                                     .addComponent(cpf_field, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -190,17 +209,33 @@ public class customerScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        /* Aqui o botão deverá checar se no id_field há algum dado, se não ouver, deverá cadastrar um novo cliente, caso houver, deverá salvar as alterações feitas.
-            No banco de dados eh aonde decidimos se vamos usar INSERT INTO ou UPDATE.
-        */
-        if(id_field == null){
-            addCustomer();
+       
+          String idf;
+          idf = id_field.getText();
+          
+          
+        if(id_field.getText().isBlank()){
+            //addCustomer();
+            System.out.println("Campo vazio!    " + idf);
         }
         else{
-            editCustomer();
+            //editCustomer();
+            System.out.println("Campo nao vazio!    "+ idf);
         }
-        
+
     }//GEN-LAST:event_save_btnActionPerformed
+
+    private void id_sch_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_sch_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_sch_fieldActionPerformed
+
+    private void id_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_fieldActionPerformed
+
+    private void home_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_home_btnActionPerformed
 
     /**
      * @param args the command line arguments

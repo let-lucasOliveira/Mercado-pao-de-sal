@@ -22,7 +22,7 @@ public class CustomerDAO {
         this.conn = this.cnct.getConnection ();
     }
         public void add (Customer customer) {
-        String sql = "INSERT INTO pessoa (nome, sexo, idioma) VALUES (?,?,?);";
+        String sql = "INSERT INTO cliente (cli_nome, cli_email, cli_cpf) VALUES (?,?,?);";
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -32,13 +32,13 @@ public class CustomerDAO {
             
             stmt.execute();
         } catch (SQLException ex) {
-            System.out.println("Erro ao inserir pessoa: "+ex.getMessage());
+            System.out.println("Erro ao inserir cliente: "+ex.getMessage());
         }
     }
         
     public void update(Customer customer){
         try{   
-            String sql = "UPDATE pessoa SET nome=?, email=?, cpf=? WHERE id=?";
+            String sql = "UPDATE cliente SET cli_nome=?, cli_email=?, cli_cpf=? WHERE id=?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, customer.getNome());
@@ -53,7 +53,7 @@ public class CustomerDAO {
     
     public void delete (int id) {
         try{
-            String sql = "DELETE FROM pessoa WHERE id=?";
+            String sql = "DELETE FROM cliente WHERE cli_id=?";
             
             PreparedStatement stmt = conn.prepareCall(sql);
             stmt.setInt(1, id);
