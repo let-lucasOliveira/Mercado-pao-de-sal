@@ -34,15 +34,16 @@ public class Customer {
         this.email = email;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
     private int id;
     private String nome;
     private String email;
-    private int cpf;
+    private String cpf;
 }

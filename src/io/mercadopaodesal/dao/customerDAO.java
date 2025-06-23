@@ -21,14 +21,14 @@ public class CustomerDAO {
         this.cnct = new ConnectionFactory ();
         this.conn = this.cnct.getConnection ();
     }
-        public void inserir (Customer customer) {
+        public void add (Customer customer) {
         String sql = "INSERT INTO pessoa (nome, sexo, idioma) VALUES (?,?,?);";
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, customer.getNome());
             stmt.setString(2, customer.getEmail());
-            stmt.setInt(3, customer.getCpf());
+            stmt.setString(3, customer.getCpf());
             
             stmt.execute();
         } catch (SQLException ex) {
@@ -36,14 +36,14 @@ public class CustomerDAO {
         }
     }
         
-    public void editar(Customer customer){
+    public void update(Customer customer){
         try{   
-            String sql = "UPDATE pessoa SET nome=?, sexo=?, idioma=? WHERE id=?";
+            String sql = "UPDATE pessoa SET nome=?, email=?, cpf=? WHERE id=?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, customer.getNome());
             stmt.setString(2, customer.getEmail());
-            stmt.setInt(3, customer.getCpf());
+            stmt.setString(3, customer.getCpf());
             stmt.setInt(4,customer.getId());
             stmt.execute();
         } catch(SQLException ex){
@@ -51,7 +51,7 @@ public class CustomerDAO {
        }
     }
     
-    public void excluir (int id) {
+    public void delete (int id) {
         try{
             String sql = "DELETE FROM pessoa WHERE id=?";
             

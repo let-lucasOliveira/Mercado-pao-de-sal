@@ -2,6 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import io.mercadopaodesal.db.FunctionOnDB
+
 package io.mercadopaodesal.ui;
 
 /**
@@ -15,6 +17,19 @@ public class customerScreen extends javax.swing.JFrame {
     /**
      * Creates new form costumerScreen
      */
+    
+    int id;
+    String name;
+    String email;
+    int cpf;
+    
+    private void clearForm(){
+        id_field.setText(null);
+        name_field.setText(null);
+        email_field.setText(null);
+        cpf_field.setText(null);
+    }
+    
     public customerScreen() {
         initComponents();
     }
@@ -155,6 +170,11 @@ public class customerScreen extends javax.swing.JFrame {
         /* Aqui o botão deverá checar se no id_field há algum dado, se não ouver, deverá cadastrar um novo cliente, caso houver, deverá salvar as alterações feitas.
             No banco de dados eh aonde decidimos se vamos usar INSERT INTO ou UPDATE.
         */
+        if(id_field == null){
+            addCustomer();
+        }
+        
+        
     }//GEN-LAST:event_save_btnActionPerformed
 
     /**
