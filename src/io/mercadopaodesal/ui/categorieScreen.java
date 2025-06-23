@@ -4,6 +4,11 @@
  */
 package io.mercadopaodesal.ui;
 
+import io.mercadopaodesal.dao.Category;
+import io.mercadopaodesal.dao.CategoryDAO;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author lucas
@@ -12,13 +17,40 @@ public class categorieScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(categorieScreen.class.getName());
 
-    /**
-     * Creates new form categorieScreen
-     */
+    int id;
+    String name;
+    String description;
+    
     public categorieScreen() {
         initComponents();
     }
+    
+    private void clearForm() {
+        name_field.setText(null);
+        desc_field.setText(null);
+    }
+    
+    private void addCategory(){
+        Category newC = new Category();
+        
+        newC.setNome(name_field.getText());
+        newC.setDescription(desc_field.getText());
+        
+        CategoryDAO cDAO = new CategoryDAO();
+        cDAO.add(newC);
+    }
 
+    private void editCategory(){
+        Category newC = new Category();
+        
+        newC.setId(Integer.parseInt(id_field.getText()));
+        newC.setNome(name_field.getText());
+        newC.setDescription(desc_field.getText());
+        
+        CategoryDAO cDAO = new CategoryDAO();
+        cDAO.update(newC);
+        //clearForm();   
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,21 +60,118 @@ public class categorieScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        name_field = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        save_btn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        sch_btn = new javax.swing.JButton();
+        delete_btn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        id_field = new javax.swing.JTextField();
+        desc_field = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("CATEGORIAS");
+
+        jLabel2.setText("Nome");
+
+        jLabel3.setText("Descrição");
+
+        save_btn.setText("Salvar");
+        save_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_btnActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ID");
+
+        sch_btn.setText("Buscar");
+
+        delete_btn.setText("Deletar");
+
+        jLabel5.setText("ID");
+
+        id_field.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sch_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(delete_btn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(save_btn)
+                            .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(name_field)
+                            .addComponent(desc_field, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sch_btn)
+                        .addComponent(delete_btn))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(desc_field, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(save_btn)
+                .addGap(65, 65, 65))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
+        if(id_field.getText().isBlank()){
+            addCategory();
+            System.out.println("Texto em branco");
+        }else{
+            editCategory();
+            System.out.println("Texto nao em branco");
+        }
+        clearForm();
+    }//GEN-LAST:event_save_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +199,17 @@ public class categorieScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton delete_btn;
+    private javax.swing.JTextField desc_field;
+    private javax.swing.JTextField id_field;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField name_field;
+    private javax.swing.JButton save_btn;
+    private javax.swing.JButton sch_btn;
     // End of variables declaration//GEN-END:variables
 }

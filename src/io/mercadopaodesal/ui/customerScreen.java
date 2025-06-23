@@ -209,18 +209,11 @@ public class customerScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-       
-          String idf;
-          idf = id_field.getText();
-          
-          
         if(id_field.getText().isBlank()){
-            //addCustomer();
-            System.out.println("Campo vazio!    " + idf);
+            addCustomer();
         }
         else{
-            //editCustomer();
-            System.out.println("Campo nao vazio!    "+ idf);
+            editCustomer();
         }
 
     }//GEN-LAST:event_save_btnActionPerformed
