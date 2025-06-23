@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-import io.mercadopaodesal.db.FunctionOnDB
-
 package io.mercadopaodesal.ui;
+
+import io.mercadopaodesal.dao.Customer;
+import io.mercadopaodesal.dao.Customer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,13 +19,24 @@ public class customerScreen extends javax.swing.JFrame {
     int id;
     String name;
     String email;
-    int cpf;
+    String cpf;
     
     private void clearForm(){
         id_field.setText(null);
         name_field.setText(null);
         email_field.setText(null);
         cpf_field.setText(null);
+    }
+    
+    private void addCustomer () {
+        Customer c = new Customer();
+        
+        name = name_field.getText();
+        email = email_field.getText();
+        cpf = cpf_field.getText();
+    }
+    private void editCustomer () {
+        
     }
     
     public customerScreen() {
@@ -173,7 +182,9 @@ public class customerScreen extends javax.swing.JFrame {
         if(id_field == null){
             addCustomer();
         }
-        
+        else{
+            editCustomer();
+        }
         
     }//GEN-LAST:event_save_btnActionPerformed
 
