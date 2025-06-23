@@ -9,3 +9,4 @@ build.xml
 **/*.log
 **/*.properties
 **/*.form
+/dist/
