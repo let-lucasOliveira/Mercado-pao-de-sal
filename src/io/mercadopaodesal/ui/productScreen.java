@@ -8,14 +8,14 @@ package io.mercadopaodesal.ui;
  *
  * @author lucas
  */
-public class productScreen extends javax.swing.JFrame {
+public class ProductScreen extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(productScreen.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProductScreen.class.getName());
 
     /**
      * Creates new form productScreen
      */
-    public productScreen() {
+    public ProductScreen() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class productScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new productScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ProductScreen().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
