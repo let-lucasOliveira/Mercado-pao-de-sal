@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
  *
  * @author lucas
  */
-public class customerScreen extends javax.swing.JFrame {
+public class CustomerScreen extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(customerScreen.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomerScreen.class.getName());
 
     /**
      * Creates new form costumerScreen
@@ -58,7 +58,7 @@ public class customerScreen extends javax.swing.JFrame {
         System.out.println("editCustomer escolhida");
     }
     
-    public customerScreen() {
+    public CustomerScreen() {
         initComponents();
     }
 
@@ -209,18 +209,11 @@ public class customerScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-       
-          String idf;
-          idf = id_field.getText();
-          
-          
         if(id_field.getText().isBlank()){
-            //addCustomer();
-            System.out.println("Campo vazio!    " + idf);
+            addCustomer();
         }
         else{
-            //editCustomer();
-            System.out.println("Campo nao vazio!    "+ idf);
+            editCustomer();
         }
 
     }//GEN-LAST:event_save_btnActionPerformed
@@ -259,7 +252,7 @@ public class customerScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new customerScreen().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new CustomerScreen().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
