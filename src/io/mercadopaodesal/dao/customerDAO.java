@@ -36,9 +36,9 @@ public class CustomerDAO {
                 Customer c = new Customer();
                 rs.first();
                 c.setId(id);
-                c.setCpf(rs.getString("cli_cpf"));
                 c.setEmail(rs.getString("cli_email"));
                 c.setNome(rs.getString("cli_nome"));
+                c.setCpf(rs.getString("cli_cpf"));
                 return c;
            }
            catch(SQLException ex){
@@ -64,7 +64,7 @@ public class CustomerDAO {
         
     public void update(Customer customer){
         try{   
-            String sql = "UPDATE cliente SET cli_nome=?, cli_email=?, cli_cpf=? WHERE id=?";
+            String sql = "UPDATE cliente SET cli_nome=?, cli_email=?, cli_cpf=? WHERE cli_id=?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, customer.getNome());
