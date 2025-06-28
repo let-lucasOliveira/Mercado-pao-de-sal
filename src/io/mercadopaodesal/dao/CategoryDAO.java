@@ -25,7 +25,7 @@ public class CategoryDAO {
         this.conn = this.cnct.getConnection ();
     }
         public Category getCategory (int id) {
-            String sql = "SELECT * FROM categoria WHERE id = ?";
+            String sql = "SELECT * FROM categoria WHERE cat_id = ?";
             
             try{
                 PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -35,8 +35,8 @@ public class CategoryDAO {
                 Category c = new Category();
                 rs.first();
                 c.setId(id);
-                c.setNome(rs.getString("nome"));
-                c.setDescription(rs.getString("descricao"));
+                c.setNome(rs.getString("cat_nome"));
+                c.setDescription(rs.getString("cat_descricao"));
                 return c;
             }
             catch(SQLException ex){
@@ -61,12 +61,12 @@ public class CategoryDAO {
         
     public void update(Category category){
         try{   
-            String sql = "UPDATE categoria SET cat_nome=?, cat_descricao=? WHERE id=?";
+            String sql = "UPDATE categoria SET cat_nome=?, cat_descricao=? WHERE cat_id=?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, category.getNome());
             stmt.setString(2, category.getDescription());
-            stmt.setInt(4,category.getId());
+            stmt.setInt(3,category.getId());
             stmt.execute();
         } catch(SQLException ex){
             System.out.println("Error to update the customer data: "+ex.getMessage());
