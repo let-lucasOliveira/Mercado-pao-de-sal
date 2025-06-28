@@ -40,7 +40,7 @@ public class CategoryDAO {
                 return c;
             }
             catch(SQLException ex){
-                System.out.println("ERROR consulting!");
+                System.out.println("Error consulting!");
                 return null;
             }
         }
@@ -69,7 +69,7 @@ public class CategoryDAO {
             stmt.setInt(3,category.getId());
             stmt.execute();
         } catch(SQLException ex){
-            System.out.println("Error to update the category data: "+ex.getMessage());
+            System.out.println("Error to update the category: "+ex.getMessage());
        }
     }
     
@@ -81,7 +81,7 @@ public class CategoryDAO {
             stmt.setInt(1,id);
             stmt.execute();
         }catch(SQLException ex){
-            System.out.println("Error deleting categoria: "+ex.getMessage());
+            System.out.println("Error deleting category: "+ex.getMessage());
         }
     }
 }
