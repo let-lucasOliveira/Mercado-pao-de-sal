@@ -6,8 +6,7 @@ package io.mercadopaodesal.ui;
 
 import io.mercadopaodesal.dao.Category;
 import io.mercadopaodesal.dao.CategoryDAO;
-import java.util.HashSet;
-import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,10 +15,6 @@ import java.util.Set;
 public class CategoryScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CategoryScreen.class.getName());
-
-    int id;
-    String name;
-    String description;
     
     public CategoryScreen() {
         initComponents();
@@ -66,7 +61,7 @@ public class CategoryScreen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         save_btn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        idSrch_field = new javax.swing.JTextField();
         sch_btn = new javax.swing.JButton();
         delete_btn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -91,6 +86,11 @@ public class CategoryScreen extends javax.swing.JFrame {
         jLabel4.setText("ID");
 
         sch_btn.setText("Buscar");
+        sch_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sch_btnActionPerformed(evt);
+            }
+        });
 
         delete_btn.setText("Deletar");
 
@@ -112,7 +112,7 @@ public class CategoryScreen extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sch_btn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,7 +138,7 @@ public class CategoryScreen extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(sch_btn)
                         .addComponent(delete_btn))
                     .addComponent(jLabel4))
@@ -171,6 +171,23 @@ public class CategoryScreen extends javax.swing.JFrame {
         clearForm();
     }//GEN-LAST:event_save_btnActionPerformed
 
+    private void sch_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sch_btnActionPerformed
+       clearForm();
+       
+       int idCategory = Integer.parseInt(idSrch_field.getText());
+       CategoryDAO cDAO = new CategoryDAO();
+       
+       Category c = cDAO.getCategory(idCategory);
+       if(c == null) {
+       name_field.setText("");
+       JOptionPane.showMessageDialog(this,"Categoria não encontrada!");
+       }
+       else {
+           id_field.setText(Integer.toString(c.getId()));
+           name_field.setText(c.getNome());
+           desc_field.setText(c.getDescription());
+       }
+    }//GEN-LAST:event_sch_btnActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -199,13 +216,13 @@ public class CategoryScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton delete_btn;
     private javax.swing.JTextField desc_field;
+    private javax.swing.JTextField idSrch_field;
     private javax.swing.JTextField id_field;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField name_field;
     private javax.swing.JButton save_btn;
     private javax.swing.JButton sch_btn;

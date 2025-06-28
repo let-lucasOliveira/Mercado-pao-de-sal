@@ -7,7 +7,10 @@ package io.mercadopaodesal.dao;
 import io.mercadopaodesal.db.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -21,6 +24,27 @@ public class CategoryDAO {
         this.cnct = new ConnectionFactory ();
         this.conn = this.cnct.getConnection ();
     }
+        public Category getCategory (int id) {
+            String sql = "SELECT * FROM categoria WHERE id = ?";
+            
+            try{
+                PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+                Category c = new Category();
+                rs.first();
+                c.setId(id);
+                c.setNome(rs.getString("nome"));
+                c.setDescription(rs.getString("descricao"));
+                return c;
+            }
+            catch(SQLException ex){
+                System.out.println("ERROR consulting!");
+                return null;
+            }
+        }
+        
         public void add (Category category) {
         String sql = "INSERT INTO categoria (cat_nome, cat_descricao) VALUES (?,?);";
         
