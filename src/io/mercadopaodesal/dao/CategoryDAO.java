@@ -24,7 +24,7 @@ public class CategoryDAO {
         this.cnct = new ConnectionFactory ();
         this.conn = this.cnct.getConnection ();
     }
-        public Category getCategory (int id) {
+        public Category get (int id) {
             String sql = "SELECT * FROM categoria WHERE cat_id = ?";
             
             try{
@@ -69,7 +69,7 @@ public class CategoryDAO {
             stmt.setInt(3,category.getId());
             stmt.execute();
         } catch(SQLException ex){
-            System.out.println("Error to update the customer data: "+ex.getMessage());
+            System.out.println("Error to update the category data: "+ex.getMessage());
        }
     }
     

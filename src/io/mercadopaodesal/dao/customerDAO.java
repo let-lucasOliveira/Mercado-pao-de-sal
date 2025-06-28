@@ -7,7 +7,10 @@ package io.mercadopaodesal.dao;
 import io.mercadopaodesal.db.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -21,6 +24,29 @@ public class CustomerDAO {
         this.cnct = new ConnectionFactory ();
         this.conn = this.cnct.getConnection ();
     }
+    
+        public Customer get (int id){
+            String sql = "SELECT * FROM cliente WHERE cli_id = ?";
+                
+           try{ 
+                PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+                Customer c = new Customer();
+                rs.first();
+                c.setId(id);
+                c.setCpf(rs.getString("cli_cpf"));
+                c.setEmail(rs.getString("cli_email"));
+                c.setNome(rs.getString("cli_nome"));
+                return c;
+           }
+           catch(SQLException ex){
+               System.out.println("Error consulting!");
+               return null;
+           }
+        }
+    
         public void add (Customer customer) {
         String sql = "INSERT INTO cliente (cli_nome, cli_email, cli_cpf) VALUES (?,?,?);";
         

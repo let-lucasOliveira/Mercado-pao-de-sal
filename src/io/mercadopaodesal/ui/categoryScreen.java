@@ -202,7 +202,7 @@ public class CategoryScreen extends javax.swing.JFrame {
        int idCategory = Integer.parseInt(idSrch_field.getText());
        CategoryDAO cDAO = new CategoryDAO();
        
-       Category c = cDAO.getCategory(idCategory);
+       Category c = cDAO.get(idCategory);
        if(c == null) {
        name_field.setText("");
        JOptionPane.showMessageDialog(this,"Categoria não encontrada!");
