@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 /**
  *
@@ -73,15 +74,25 @@ public class CategoryDAO {
        }
     }
     
-    public void delete (int id) {
-        try{
-            String sql = "DELETE FROM categoria WHERE cat_id=?";
-            
-            PreparedStatement stmt = conn.prepareCall(sql);
-            stmt.setInt(1,id);
-            stmt.execute();
-        }catch(SQLException ex){
-            System.out.println("Error deleting category: "+ex.getMessage());
+    
+    public Vector<Category> getAll() {
+        Vector<Category> categories = new Vector<>();
+
+        String sql = "SELECT * FROM categoria";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("cat_id");
+                String name = rs.getString("cat_nome");
+                categories.add(new Category(id, name));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching categories: " + e.getMessage());
         }
+
+        return categories;
     }
 }
