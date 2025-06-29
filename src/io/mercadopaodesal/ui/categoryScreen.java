@@ -64,7 +64,6 @@ public class CategoryScreen extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         idSrch_field = new javax.swing.JTextField();
         sch_btn = new javax.swing.JButton();
-        delete_btn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         id_field = new javax.swing.JTextField();
         clearID_btn = new javax.swing.JButton();
@@ -73,6 +72,7 @@ public class CategoryScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("CATEGORIAS");
 
         jLabel2.setText("Nome");
@@ -92,13 +92,6 @@ public class CategoryScreen extends javax.swing.JFrame {
         sch_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sch_btnActionPerformed(evt);
-            }
-        });
-
-        delete_btn.setText("Deletar");
-        delete_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delete_btnActionPerformed(evt);
             }
         });
 
@@ -135,9 +128,7 @@ public class CategoryScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sch_btn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(delete_btn))
+                        .addComponent(sch_btn))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
@@ -163,10 +154,9 @@ public class CategoryScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(sch_btn)
-                        .addComponent(delete_btn))
+                        .addComponent(sch_btn))
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,15 +206,6 @@ public class CategoryScreen extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_sch_btnActionPerformed
 
-    private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
-        int asnw = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esta categoria?", "Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
-        if (asnw == JOptionPane.YES_NO_OPTION){
-            CategoryDAO cDAO = new CategoryDAO();
-            cDAO.delete(Integer.parseInt(idSrch_field.getText()));
-            clearForm();
-        }
-    }//GEN-LAST:event_delete_btnActionPerformed
-
     private void clearID_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearID_btnActionPerformed
         id_field.setText("");
     }//GEN-LAST:event_clearID_btnActionPerformed
@@ -255,7 +236,6 @@ public class CategoryScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearID_btn;
-    private javax.swing.JButton delete_btn;
     private javax.swing.JTextArea desc_field;
     private javax.swing.JTextField idSrch_field;
     private javax.swing.JTextField id_field;
