@@ -25,7 +25,7 @@ public class SuplierDAO {
     }
     
         public Suplier get (int id){
-            String sql = "SELECT * FROM fornecedor WHERE cli_id = ?";
+            String sql = "SELECT * FROM fornecedor WHERE for_id = ?";
                 
            try{ 
                 PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -47,7 +47,7 @@ public class SuplierDAO {
         }
     
         public void add (Suplier suplier) {
-        String sql = "INSERT INTO fornecedor (for_nome, for_nomeFantasia, for_cnpj) VALUES (?,?,?);";
+        String sql = "INSERT INTO fornecedor (for_nome, for_nomFantasia, for_cnpj) VALUES (?,?,?);";
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class SuplierDAO {
             
             stmt.execute();
         } catch (SQLException ex) {
-            System.out.println("Erro ao inserir cliente: "+ex.getMessage());
+            System.out.println("Erro ao inserir Fornecedor: "+ex.getMessage());
         }
     }
         
