@@ -16,11 +16,6 @@ public class CustomerScreen extends javax.swing.JFrame {
      * Creates new form costumerScreen
      */
     
-    int id;
-    String name;
-    String email;
-    String cpf;
-    
     private void clearForm(){
         id_field.setText(null);
         name_field.setText(null);
@@ -71,7 +66,6 @@ public class CustomerScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        home_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -82,19 +76,14 @@ public class CustomerScreen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         id_field = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        id_sch_field = new javax.swing.JTextField();
+        idSrch_field = new javax.swing.JTextField();
         search_btn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         save_btn = new javax.swing.JButton();
+        clearID_btn = new javax.swing.JButton();
+        delete_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        home_btn.setText("Voltar");
-        home_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                home_btnActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Nome");
 
@@ -106,6 +95,7 @@ public class CustomerScreen extends javax.swing.JFrame {
 
         jLabel5.setText("ID");
 
+        id_field.setEnabled(false);
         id_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 id_fieldActionPerformed(evt);
@@ -114,14 +104,19 @@ public class CustomerScreen extends javax.swing.JFrame {
 
         jLabel6.setText("ID");
 
-        id_sch_field.setToolTipText("");
-        id_sch_field.addActionListener(new java.awt.event.ActionListener() {
+        idSrch_field.setToolTipText("");
+        idSrch_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_sch_fieldActionPerformed(evt);
+                idSrch_fieldActionPerformed(evt);
             }
         });
 
         search_btn.setText("Buscar");
+        search_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_btnActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("BUSCAR CLIENTE");
 
@@ -132,6 +127,20 @@ public class CustomerScreen extends javax.swing.JFrame {
             }
         });
 
+        clearID_btn.setText("Limpar ID");
+        clearID_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearID_btnActionPerformed(evt);
+            }
+        });
+
+        delete_btn.setText("Deletar");
+        delete_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,19 +148,10 @@ public class CustomerScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(home_btn)
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(177, 177, 177)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(id_sch_field))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(search_btn))))
+                            .addComponent(jLabel7)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -167,27 +167,40 @@ public class CustomerScreen extends javax.swing.JFrame {
                                     .addComponent(name_field)
                                     .addComponent(email_field)
                                     .addComponent(cpf_field, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(clearID_btn))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(idSrch_field, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(search_btn)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(delete_btn)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(home_btn)
-                    .addComponent(jLabel7))
-                .addGap(30, 30, 30)
+                .addComponent(jLabel7)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(id_sch_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search_btn))
-                .addGap(46, 46, 46)
+                    .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_btn)
+                    .addComponent(delete_btn))
+                .addGap(39, 39, 39)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(id_field, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(clearID_btn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -202,7 +215,7 @@ public class CustomerScreen extends javax.swing.JFrame {
                     .addComponent(cpf_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(save_btn)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,17 +231,43 @@ public class CustomerScreen extends javax.swing.JFrame {
 
     }//GEN-LAST:event_save_btnActionPerformed
 
-    private void id_sch_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_sch_fieldActionPerformed
+    private void idSrch_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idSrch_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_id_sch_fieldActionPerformed
+    }//GEN-LAST:event_idSrch_fieldActionPerformed
 
     private void id_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_id_fieldActionPerformed
 
-    private void home_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_home_btnActionPerformed
+    private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
+        clearForm();
+        int idCustomer = Integer.parseInt(idSrch_field.getText());
+        CustomerDAO cDAO = new CustomerDAO();
+        
+        Customer c = cDAO.get(idCustomer);
+        if(c == null){
+            id_field.setText("");
+            name_field.setText("");
+            email_field.setText("");
+            cpf_field.setText("");
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado");
+        }
+        else{
+            id_field.setText(Integer.toString(c.getId()));
+            name_field.setText(c.getNome());
+            email_field.setText(c.getEmail());
+            cpf_field.setText(c.getCpf());
+        }
+    }//GEN-LAST:event_search_btnActionPerformed
+
+    private void clearID_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearID_btnActionPerformed
+        id_field.setText("");
+        
+    }//GEN-LAST:event_clearID_btnActionPerformed
+
+    private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
+
+    }//GEN-LAST:event_delete_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,11 +295,12 @@ public class CustomerScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearID_btn;
     private javax.swing.JTextField cpf_field;
+    private javax.swing.JButton delete_btn;
     private javax.swing.JTextField email_field;
-    private javax.swing.JButton home_btn;
+    private javax.swing.JTextField idSrch_field;
     private javax.swing.JTextField id_field;
-    private javax.swing.JTextField id_sch_field;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

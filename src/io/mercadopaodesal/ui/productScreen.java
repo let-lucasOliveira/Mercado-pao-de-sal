@@ -4,6 +4,15 @@
  */
 package io.mercadopaodesal.ui;
 
+import com.sun.jdi.connect.spi.Connection;
+import java.util.Vector;
+import io.mercadopaodesal.dao.CategoryDAO;
+import io.mercadopaodesal.dao.Category;
+import io.mercadopaodesal.dao.Product;
+import io.mercadopaodesal.dao.ProductDAO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas
@@ -17,6 +26,62 @@ public class ProductScreen extends javax.swing.JFrame {
      */
     public ProductScreen() {
         initComponents();
+        loadCategories();
+    }
+    
+        
+    private void clearForm() {
+        name_field.setText("");
+        cat_cbox.setSelectedIndex(0);
+        price_field.setText("");
+        barCode_field.setText("");
+    }
+    
+    private boolean addProduct(){
+        if(cat_cbox.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Por favor selecione uma categoria!", "Categoria não selecionada", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        try {
+            Product p = new Product();
+            p.setNome(name_field.getText());
+            Category selectedCat = (Category) cat_cbox.getSelectedItem();
+            p.setCatId(selectedCat.getId());
+            p.setPreco(Double.parseDouble(price_field.getText()));
+            p.setCodBarras(barCode_field.getText());
+
+            ProductDAO pDAO = new ProductDAO();
+            pDAO.add(p);
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Preço inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    private boolean editProduct(){
+        if(cat_cbox.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Por favor selecione uma categoria!", "Categoria não selecionada", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        try {
+            Product p = new Product();
+            p.setId(Integer.parseInt(id_field.getText()));
+            p.setNome(name_field.getText());
+            Category selectedCat = (Category) cat_cbox.getSelectedItem();
+            p.setCatId(selectedCat.getId());
+            p.setPreco(Double.parseDouble(price_field.getText()));
+            p.setCodBarras(barCode_field.getText());
+
+            ProductDAO pDAO = new ProductDAO();
+            pDAO.update(p); 
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Preço inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     /**
@@ -28,21 +93,241 @@ public class ProductScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        idSrch_field = new javax.swing.JTextField();
+        srch_btn = new javax.swing.JButton();
+        delete_btn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        id_field = new javax.swing.JTextField();
+        name_field = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cat_cbox = new javax.swing.JComboBox<>();
+        Preço = new javax.swing.JLabel();
+        price_field = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        barCode_field = new javax.swing.JTextField();
+        clearID_btn = new javax.swing.JButton();
+        save_btn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("PRODUTOS");
+
+        jLabel2.setText("ID");
+
+        idSrch_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idSrch_fieldActionPerformed(evt);
+            }
+        });
+
+        srch_btn.setText("Pesquisar");
+        srch_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srch_btnActionPerformed(evt);
+            }
+        });
+
+        delete_btn.setText("Deletar");
+        delete_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_btnActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("ID");
+
+        jLabel4.setText("Nome");
+
+        id_field.setEnabled(false);
+
+        jLabel5.setText("Categoria");
+
+        Preço.setText("Preço");
+
+        price_field.setToolTipText("");
+
+        jLabel6.setText("Código de barras");
+
+        clearID_btn.setText("Limpar ID");
+        clearID_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearID_btnActionPerformed(evt);
+            }
+        });
+
+        save_btn.setText("Salvar");
+        save_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(srch_btn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(delete_btn))
+                                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Preço)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(clearID_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barCode_field, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(name_field))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(price_field)
+                                            .addComponent(cat_cbox, 0, 294, Short.MAX_VALUE))))
+                                .addComponent(save_btn)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idSrch_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(srch_btn)
+                    .addComponent(delete_btn))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearID_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cat_cbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Preço)
+                    .addComponent(price_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(barCode_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(save_btn)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void idSrch_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idSrch_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idSrch_fieldActionPerformed
+
+    private void clearID_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearID_btnActionPerformed
+        id_field.setText("");
+    }//GEN-LAST:event_clearID_btnActionPerformed
+
+    private void srch_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srch_btnActionPerformed
+       clearForm();
+       
+       int idProduct = Integer.parseInt(idSrch_field.getText());
+       ProductDAO pDAO = new ProductDAO();
+       Product p = pDAO.get(idProduct);
+       
+       if(p == null) {
+        id_field.setText("");
+        name_field.setText("");
+        cat_cbox.setSelectedIndex(0);
+        price_field.setText("");
+        barCode_field.setText("");
+        
+        JOptionPane.showMessageDialog(this,"Product not found!");
+       }
+       else {
+           id_field.setText(Integer.toString(p.getId()));
+           name_field.setText(p.getNome());
+           for (int i = 0; i < cat_cbox.getItemCount(); i++) {
+               Category c = cat_cbox.getItemAt(i);
+               if (c.getId() == p.getCatId()) {
+                   cat_cbox.setSelectedIndex(i);
+                   break;
+               }
+           }
+           price_field.setText(Double.toString(p.getPreco()));
+           barCode_field.setText(p.getCodBarras());
+       }
+    }//GEN-LAST:event_srch_btnActionPerformed
+
+    private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
+        int asnw = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esta categoria?", "Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (asnw == JOptionPane.YES_NO_OPTION){
+            ProductDAO pDAO = new ProductDAO();
+            pDAO.delete(Integer.parseInt(idSrch_field.getText()));
+            clearForm();
+        }
+    }//GEN-LAST:event_delete_btnActionPerformed
+
+    private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
+    boolean success = false;
+
+    if (id_field.getText().isBlank()) {
+        success = addProduct();
+    } else {
+        success = editProduct();
+    }
+
+    if (success) {
+        clearForm();
+    }
+    }//GEN-LAST:event_save_btnActionPerformed
+
+    
+        
+    private void loadCategories() {
+        CategoryDAO dao = new CategoryDAO();
+        Vector<Category> categories = dao.getAll();
+
+        Category placeholder = new Category(0, "Selecione a categoria");
+        categories.insertElementAt(placeholder, 0);
+
+        DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<>(categories);
+        cat_cbox.setModel(model);
+        cat_cbox.setSelectedIndex(0);
+    }
+
 
     /**
      * @param args the command line arguments
@@ -70,5 +355,22 @@ public class ProductScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JLabel Preço;
+    private javax.swing.JTextField barCode_field;
+    private javax.swing.JComboBox<Category> cat_cbox;
+    private javax.swing.JButton clearID_btn;
+    private javax.swing.JButton delete_btn;
+    private javax.swing.JTextField idSrch_field;
+    private javax.swing.JTextField id_field;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField name_field;
+    private javax.swing.JTextField price_field;
+    private javax.swing.JButton save_btn;
+    private javax.swing.JButton srch_btn;
     // End of variables declaration//GEN-END:variables
 }
