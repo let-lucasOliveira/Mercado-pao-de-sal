@@ -25,7 +25,7 @@ public class NFDAO {
     }
     
         public NF get (int id){
-            String sql = "SELECT * FROM fornecedor WHERE for_id = ?";
+            String sql = "SELECT * FROM notafiscal WHERE nf_id = ?";
                 
            try{ 
                 PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);

@@ -51,7 +51,6 @@ public class NfScreen extends javax.swing.JFrame {
     private void addNF() {
         NF newNF = new NF();
 
-        // Only parse ID if not blank
         String idText = id_field.getText().trim();
         if (!idText.isEmpty()) {
             try {
@@ -164,6 +163,11 @@ public class NfScreen extends javax.swing.JFrame {
         jLabel1.setText("ID");
 
         srch_btn.setText("Buscar");
+        srch_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srch_btnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("ID");
 
@@ -304,6 +308,29 @@ public class NfScreen extends javax.swing.JFrame {
         
         clearForm();
     }//GEN-LAST:event_save_btnActionPerformed
+
+    private void srch_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srch_btnActionPerformed
+        clearForm();
+        int idCustomer = Integer.parseInt(idSrch_field.getText());
+        NFDAO sDAO = new NFDAO();
+
+        NF s = sDAO.get(idCustomer);
+        if (s == null) {
+            clearForm();
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado");
+        } else {
+            id_field.setText(Integer.toString(s.getId()));
+            date_field.setText(s.getDate());
+            tValue_field.setText(Double.toString(s.gettValue()));
+            if (s.getCustomerID() == null) {
+                suplier_option.setSelected(true);
+                clientId_field.setText(Integer.toString(s.getSuplierID()));
+            } else {
+                costumer_option.setSelected(true);
+                clientId_field.setText(Integer.toString(s.getCustomerID()));
+            }
+        }
+    }//GEN-LAST:event_srch_btnActionPerformed
 
     /**
      * @param args the command line arguments
