@@ -93,7 +93,7 @@ public class ProductDAO {
         try{
             String sql = "DELETE FROM produto WHERE prod_id=?";
             
-            PreparedStatement stmt = conn.prepareCall(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.execute();
         }catch(SQLException ex){
