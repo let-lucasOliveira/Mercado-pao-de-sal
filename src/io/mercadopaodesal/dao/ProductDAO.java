@@ -62,7 +62,7 @@ public class ProductDAO {
 
             int rows = stmt.executeUpdate();
             if (rows > 0) {
-                System.out.println("Product added succesfuly!");
+                System.out.println("Product added successfully!");
             } else {
                 System.out.println("Any product was add.");
             }
