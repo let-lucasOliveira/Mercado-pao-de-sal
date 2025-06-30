@@ -24,25 +24,29 @@ public class ProductDAO {
      this.cnct = new ConnectionFactory();
      this.conn = this.cnct.getConnection();
     }
-    public Product get (int id){
-        String sql = "SELECT * FROM produto WHERE prod_id = ?"; 
+    public Product get(int id) {
+        String sql = "SELECT * FROM produto WHERE prod_id = ?";
 
-        try{
-            PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
+
             ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return null; // No result found
+            }
+
             Product p = new Product();
-            rs.first();
-            p.setId(id);
-            p.setCatId(rs.getInt("cat_id"));
-            p.setCodBarras(rs.getString("prod_codigoBarras"));
+            p.setId(rs.getInt("prod_id"));
             p.setNome(rs.getString("prod_nome"));
-            p.setPreco(rs.getInt("prod_preco"));
+            p.setPreco(rs.getDouble("prod_preco"));
+            p.setCodBarras(rs.getString("prod_codBarras"));
+            p.setCatId(rs.getInt("cat_id"));
             return p;
-        }
-        catch(SQLException ex){
-            System.out.println("Error consulting");
+
+        } catch (SQLException ex) {
+            System.out.println("Error consulting: " + ex.getMessage());
             return null;
         }
     }
@@ -70,7 +74,7 @@ public class ProductDAO {
         
     public void update(Product product){
         try{
-            String sql = "UPDATE produto SET prod_nome=?, cat_id=?, prod_preco=?, prod_codigoBarras=? WHERE prod_id=?";
+            String sql = "UPDATE produto SET prod_nome=?, cat_id=?, prod_preco=?, prod_codBarras=? WHERE prod_id=?";
             
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, product.getNome());

@@ -261,7 +261,34 @@ public class ProductScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_clearID_btnActionPerformed
 
     private void srch_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srch_btnActionPerformed
-        // TODO add your handling code here:
+       clearForm();
+       
+       int idProduct = Integer.parseInt(idSrch_field.getText());
+       ProductDAO pDAO = new ProductDAO();
+       Product p = pDAO.get(idProduct);
+       
+       if(p == null) {
+        id_field.setText("");
+        name_field.setText("");
+        cat_cbox.setSelectedIndex(0);
+        price_field.setText("");
+        barCode_field.setText("");
+        
+        JOptionPane.showMessageDialog(this,"Product not found!");
+       }
+       else {
+           id_field.setText(Integer.toString(p.getId()));
+           name_field.setText(p.getNome());
+           for (int i = 0; i < cat_cbox.getItemCount(); i++) {
+               Category c = cat_cbox.getItemAt(i);
+               if (c.getId() == p.getCatId()) {
+                   cat_cbox.setSelectedIndex(i);
+                   break;
+               }
+           }
+           price_field.setText(Double.toString(p.getPreco()));
+           barCode_field.setText(p.getCodBarras());
+       }
     }//GEN-LAST:event_srch_btnActionPerformed
 
     private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
@@ -289,11 +316,13 @@ public class ProductScreen extends javax.swing.JFrame {
         Vector<Category> categories = dao.getAll();
 
         Category placeholder = new Category(0, "Selecione a categoria");
-        categories.insertElementAt(placeholder, 0);  // Insert at index 0
+        categories.insertElementAt(placeholder, 0);
 
-        cat_cbox.setModel(new DefaultComboBoxModel<>(categories));
-        cat_cbox.setSelectedIndex(0);  // Make sure it's selected by default
+        DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<>(categories);
+        cat_cbox.setModel(model);
+        cat_cbox.setSelectedIndex(0);
     }
+
 
     /**
      * @param args the command line arguments
