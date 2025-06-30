@@ -4,6 +4,11 @@
  */
 package io.mercadopaodesal.ui;
 
+import io.mercadopaodesal.dao.CustomerDAO;
+import io.mercadopaodesal.dao.Suplier;
+import io.mercadopaodesal.dao.SuplierDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas
@@ -17,6 +22,43 @@ public class SuplierScreen extends javax.swing.JFrame {
      */
     public SuplierScreen() {
         initComponents();
+    }
+    
+    private void clearForm(){
+        id_field.setText("");
+        name_field.setText("");
+        fName_field.setText("");
+        cnpj_field.setText("");
+    }
+    
+    private void addSuplier (){
+        Suplier newS = new Suplier();
+
+        newS.setName(name_field.getText());
+        newS.setFantasyName(fName_field.getText());
+        newS.setCnpj(cnpj_field.getText());
+
+        SuplierDAO sDao = new SuplierDAO();
+        sDao.add(newS);
+
+        clearForm();
+        System.out.println("addCostumer escolhida");
+    }
+    
+    private void updateSuplier (){
+        Suplier newC = new Suplier();
+
+        newC.setId(Integer.parseInt(id_field.getText()));
+        newC.setName(name_field.getText());
+        newC.setFantasyName(fName_field.getText());
+        newC.setCnpj(cnpj_field.getText());
+
+        SuplierDAO cDAO = new SuplierDAO();
+        cDAO.update(newC);
+
+        clearForm();
+
+        System.out.println("editCustomer escolhida");
     }
 
     /**
@@ -39,7 +81,7 @@ public class SuplierScreen extends javax.swing.JFrame {
         id_field = new javax.swing.JTextField();
         name_field = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        nfantasy_field = new javax.swing.JTextField();
+        fName_field = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cnpj_field = new javax.swing.JTextField();
         save_btn = new javax.swing.JButton();
@@ -51,7 +93,7 @@ public class SuplierScreen extends javax.swing.JFrame {
 
         jLabel1.setText("ID");
 
-        srch_btn.setText("Pesquisar");
+        srch_btn.setText("Buscar");
         srch_btn.setToolTipText("");
         srch_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,9 +147,9 @@ public class SuplierScreen extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel6)
+                                        .addComponent(jLabel4)
                                         .addComponent(jLabel2))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +159,7 @@ public class SuplierScreen extends javax.swing.JFrame {
                                             .addComponent(id_field)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(clearID_btn))
-                                        .addComponent(nfantasy_field, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                        .addComponent(fName_field, javax.swing.GroupLayout.Alignment.TRAILING)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +171,7 @@ public class SuplierScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(209, 209, 209)
                         .addComponent(jLabel3)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,25 +185,22 @@ public class SuplierScreen extends javax.swing.JFrame {
                     .addComponent(srch_btn)
                     .addComponent(delete_btn))
                 .addGap(119, 119, 119)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clearID_btn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nfantasy_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cnpj_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearID_btn)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fName_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cnpj_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(save_btn)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -175,15 +214,40 @@ public class SuplierScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_clearID_btnActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        // TODO add your handling code here:
+        if (id_field.getText().isBlank()) {
+            addSuplier();
+        } else {
+            updateSuplier();
+        }
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void srch_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srch_btnActionPerformed
-        // TODO add your handling code here:
+        clearForm();
+        int idCustomer = Integer.parseInt(idSrch_field.getText());
+        SuplierDAO sDAO = new SuplierDAO();
+
+        Suplier s = sDAO.get(idCustomer);
+        if (s == null) {
+            id_field.setText("");
+            name_field.setText("");
+            fName_field.setText("");
+            cnpj_field.setText("");
+            JOptionPane.showMessageDialog(this, "Cliente não encontrado");
+        } else {
+            id_field.setText(Integer.toString(s.getId()));
+            name_field.setText(s.getName());
+            fName_field.setText(s.getFantasyName());
+            cnpj_field.setText(s.getCnpj());
+        }
     }//GEN-LAST:event_srch_btnActionPerformed
 
     private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
-        // TODO add your handling code here:
+        int asnw = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este fornecedor?", "Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (asnw == JOptionPane.YES_NO_OPTION){
+            SuplierDAO sDAO = new SuplierDAO();
+            sDAO.delete(Integer.parseInt(idSrch_field.getText()));
+            clearForm();
+        }
     }//GEN-LAST:event_delete_btnActionPerformed
 
     /**
@@ -215,6 +279,7 @@ public class SuplierScreen extends javax.swing.JFrame {
     private javax.swing.JButton clearID_btn;
     private javax.swing.JTextField cnpj_field;
     private javax.swing.JButton delete_btn;
+    private javax.swing.JTextField fName_field;
     private javax.swing.JTextField idSrch_field;
     private javax.swing.JTextField id_field;
     private javax.swing.JLabel jLabel1;
@@ -225,7 +290,6 @@ public class SuplierScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField name_field;
-    private javax.swing.JTextField nfantasy_field;
     private javax.swing.JButton save_btn;
     private javax.swing.JButton srch_btn;
     // End of variables declaration//GEN-END:variables

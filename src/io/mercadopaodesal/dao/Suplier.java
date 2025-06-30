@@ -18,20 +18,20 @@ public class Suplier {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getFantasyName() {
+        return fantasyName;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setFantasyName(String fantasyName) {
+        this.fantasyName = fantasyName;
     }
 
     public String getCnpj() {
@@ -41,8 +41,9 @@ public class Suplier {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+
     private int id;
-    private String nome;
-    private String nomeFantasia;
+    private String name;
+    private String fantasyName;
     private String cnpj;
 }
