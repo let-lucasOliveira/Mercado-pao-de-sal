@@ -37,7 +37,7 @@ public class CustomerScreen extends javax.swing.JFrame {
         System.out.println("addCostumer escolhida");
     }
     
-    private void editCustomer () {
+    private void updateCustomer () {
         Customer newC = new Customer();
         
         newC.setId(Integer.parseInt(id_field.getText()));
@@ -226,7 +226,7 @@ public class CustomerScreen extends javax.swing.JFrame {
             addCustomer();
         }
         else{
-            editCustomer();
+            updateCustomer();
         }
 
     }//GEN-LAST:event_save_btnActionPerformed
@@ -266,7 +266,12 @@ public class CustomerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_clearID_btnActionPerformed
 
     private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
-
+        int asnw = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir este produto?", "Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (asnw == JOptionPane.YES_NO_OPTION){
+            CustomerDAO pDAO = new CustomerDAO();
+            pDAO.delete(Integer.parseInt(idSrch_field.getText()));
+            clearForm();
+        }
     }//GEN-LAST:event_delete_btnActionPerformed
 
     /**

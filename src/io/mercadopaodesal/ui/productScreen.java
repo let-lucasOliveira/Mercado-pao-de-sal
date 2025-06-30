@@ -60,7 +60,7 @@ public class ProductScreen extends javax.swing.JFrame {
         }
     }
 
-    private boolean editProduct(){
+    private boolean updateSuplier(){
         if(cat_cbox.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(null, "Por favor selecione uma categoria!", "Categoria não selecionada", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -306,7 +306,7 @@ public class ProductScreen extends javax.swing.JFrame {
     if (id_field.getText().isBlank()) {
         success = addProduct();
     } else {
-        success = editProduct();
+        success = updateSuplier();
     }
 
     if (success) {
