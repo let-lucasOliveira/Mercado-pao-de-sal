@@ -292,7 +292,12 @@ public class ProductScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_srch_btnActionPerformed
 
     private void delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_btnActionPerformed
-        // TODO add your handling code here:
+        int asnw = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esta categoria?", "Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (asnw == JOptionPane.YES_NO_OPTION){
+            ProductDAO pDAO = new ProductDAO();
+            pDAO.delete(Integer.parseInt(idSrch_field.getText()));
+            clearForm();
+        }
     }//GEN-LAST:event_delete_btnActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
