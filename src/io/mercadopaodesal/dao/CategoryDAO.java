@@ -74,7 +74,7 @@ public class CategoryDAO {
        }
     }
     
-    
+
     public Vector<Category> getAll() {
         Vector<Category> categories = new Vector<>();
 

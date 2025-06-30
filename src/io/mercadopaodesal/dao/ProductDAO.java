@@ -47,29 +47,37 @@ public class ProductDAO {
         }
     }
     
-    public void add (Product product){        
-        String sql = "INSERT INTO produto (prod_nome, cat_id, prod_preco, prod_codigoBarras) VALUES (?, ?, ?, ?)";
-        
-        try{
+    public void add(Product p) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            String sql = "INSERT INTO produto (prod_nome, prod_preco, prod_codBarras, cat_id) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, product.getNome());
-            stmt.setInt(2, product.getCatId());
-            stmt.setDouble(3, product.getPreco());
-            stmt.setString(4, product.getCodBarras());
-        }catch(SQLException ex){
-            System.out.println("Error to add the product: "+ex.getMessage());
+            stmt.setString(1, p.getNome());
+            stmt.setDouble(2, p.getPreco());
+            stmt.setString(3, p.getCodBarras());
+            stmt.setInt(4, p.getCatId());
+
+            int rows = stmt.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Product added succesfuly!");
+            } else {
+                System.out.println("Any product was add.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error to add product: " + e.getMessage());
         }
     }
+
         
     public void update(Product product){
         try{
-            String sql = "UPDATE produto SET prod_nome=?, cat_id=?, prod_preco=?, prod_codigoBarras=?";
+            String sql = "UPDATE produto SET prod_nome=?, cat_id=?, prod_preco=?, prod_codigoBarras=? WHERE prod_id=?";
             
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, product.getNome());
             stmt.setInt(2, product.getCatId());
             stmt.setDouble(3, product.getPreco());
-            stmt.setString(4, product.getCodBarras());          
+            stmt.setString(4, product.getCodBarras());
+            stmt.setInt(5, product.getId());
             stmt.execute();
         }
         catch(SQLException ex){
